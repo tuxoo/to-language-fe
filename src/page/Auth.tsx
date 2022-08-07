@@ -77,11 +77,11 @@ const Auth = () => {
     }, [isLoginSuccess, isRegisterSuccess]);
 
     useEffect(() => {
-        if(isLoginError) {
+        if (isLoginError) {
             toast.error((loginError as any).data.message)
         }
 
-        if(isRegisterError) {
+        if (isRegisterError) {
             toast.error((registerError as any).data.message)
         }
     }, [isLoginError, isRegisterError])
@@ -94,11 +94,11 @@ const Auth = () => {
                         <div className="card bg-dark text-white" style={{borderRadius: "1rem"}}>
                             <div className="card-body p-4 text-center">
                                 <div className="mb-md-5 mt-md-4 pb-5">
-                                    <h2 className="fw-bold mb-2 text-uppercase">
-                                        {!showRegister ? "Login" : "Register"}
+                                    <h2 className="fw-bold mb-2">
+                                        {!showRegister ? "Sign in to ToLanguage" : "Sign up to ToLanguage"}
                                     </h2>
                                     <p className="text-white-50 mb-4">
-                                        {!showRegister ? "Please enter your Email and Password" : "Please enter User details"}
+                                        {!showRegister ? "Please enter your Email and Password" : "Please enter user details"}
                                     </p>
                                     {showRegister && (
                                         <>
@@ -162,7 +162,7 @@ const Auth = () => {
                                             type="button"
                                             onClick={() => handleLogin()}
                                         >
-                                            Login
+                                            Sign in
                                         </button>
                                     ) : (
                                         <button
@@ -178,7 +178,7 @@ const Auth = () => {
                                     <h5 className="mb-0">
                                         {!showRegister ? (
                                             <>
-                                                Don't have an account ?
+                                                Don't have an account?
                                                 <p
                                                     className="text-white-50 fw-bold"
                                                     style={{cursor: "pointer"}}

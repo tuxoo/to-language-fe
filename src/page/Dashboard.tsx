@@ -2,7 +2,7 @@ import React from "react";
 import {useAppDispatch, useAppSelector} from "../hook/hooks";
 import {logout, selectAuth} from "../store/slice/authSlice";
 import {useNavigate} from "react-router-dom";
-import {toast, ToastContainer} from "react-toastify";
+import {toast} from "react-toastify";
 
 const Dashboard = () => {
     const {name} = useAppSelector(selectAuth)

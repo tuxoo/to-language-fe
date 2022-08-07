@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {Navigate, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import Auth from "./page/Auth";
 import {useAppDispatch} from "./hook/hooks";
 import {setUser} from "./store/slice/authSlice";
@@ -15,18 +15,16 @@ function App() {
         dispatch(setUser(user))
     }, []);
 
-
     return (
-        <div className="App">
+        <>
             <ToastContainer/>
             <Routes>
-                <Route path="/" element={<Navigate to="/auth" replace/>}/>
-                <Route path="/auth" element={<Auth/>}/>
+                <Route path="/" element={<Auth/>}/>
                 <Route path="/dashboard" element={<PrivateRoute>
-                    <Dashboard />
+                    <Dashboard/>
                 </PrivateRoute>}/>
             </Routes>
-        </div>
+        </>
     );
 }
 

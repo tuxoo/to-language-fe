@@ -16,7 +16,7 @@ const LoadingToRedirect = () => {
         return () => clearInterval(interval);
     }, [count, navigate]);
     return (
-        <div className="vh-100 gradient-custom">
+        <div className="vh-100 gradient-app">
             <MDBModal show={true}>
                 <MDBModalDialog centered>
                     <MDBModalContent>

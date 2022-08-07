@@ -12,6 +12,7 @@ code {
     monospace;
 }
 
-.gradient-custom {
-    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+.gradient-app {
+    background: rgb(70,236,234);
+    background: linear-gradient(0deg, rgba(70,236,234,1) 0%, rgba(68,109,227,1) 92%);
 }

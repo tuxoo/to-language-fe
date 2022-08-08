@@ -12,7 +12,7 @@ const Dashboard = () => {
     const handleLogout = () => {
         dispatch(logout());
         toast.success("User Logout Successfully");
-        navigate("/auth");
+        navigate("/");
     }
 
     return (

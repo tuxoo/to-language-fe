@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
-import {MDBInput} from "mdb-react-ui-kit";
 import {useNavigate} from "react-router-dom";
-import {useLoginUserMutation, useRegisterUserMutation} from "../service/authApi";
+import {useSignInUserMutation, useSignUpUserMutation} from "../store/users/users.api";
 import {toast} from "react-toastify";
-import {useAppDispatch} from "../hook/hooks";
-import {setUser} from "../store/slice/authSlice";
+import Input from "../component/Input";
+import {useActions} from "../hook/hooks";
 
 const initState = {
     firstName: "",
@@ -17,26 +16,28 @@ const initState = {
 const Auth = () => {
     const [formValue, setFormValue] = useState(initState);
     const [showRegister, setShowRegister] = useState(false);
-    const dispatch = useAppDispatch();
+
+    const {authenticateUser} = useActions();
 
     const navigate = useNavigate();
-    const [loginUser,
-        {
-            data: loginData,
-            isSuccess: isLoginSuccess,
-            isError: isLoginError,
-            error: loginError,
-        }
-    ] = useLoginUserMutation();
 
-    const [registerUser,
+    const [signInUser,
         {
-            data: registerData,
-            isSuccess: isRegisterSuccess,
-            isError: isRegisterError,
-            error: registerError,
+            data: signInData,
+            isSuccess: isSignInSuccess,
+            isError: isSignInError,
+            error: signInError,
         }
-    ] = useRegisterUserMutation();
+    ] = useSignInUserMutation();
+
+    const [signUpUser,
+        {
+            data: signUpData,
+            isSuccess: isSignUpSuccess,
+            isError: isSignUpError,
+            error: signUpError,
+        }
+    ] = useSignUpUserMutation();
 
     const {firstName, lastName, email, password, confirmPassword} = formValue;
 
@@ -46,7 +47,7 @@ const Auth = () => {
 
     const handleLogin = async () => {
         if (email && password) {
-            await loginUser({email, password});
+            await signInUser({email, password});
         } else {
             toast.error("Please fill all input fields")
         }
@@ -58,33 +59,33 @@ const Auth = () => {
         }
 
         if (firstName && lastName && password && email) {
-            await registerUser({firstName, lastName, email, password});
+            await signUpUser({firstName, lastName, email, password});
         }
     }
 
     useEffect(() => {
-        if (isLoginSuccess) {
+        if (isSignInSuccess) {
             toast.success("User Login Successfully");
-            dispatch(setUser({name: loginData.result.name, token: loginData.token}))
+            authenticateUser({accessToken: signInData?.accessToken ?? "", refreshToken: signInData?.accessToken ?? ""})
             navigate("/dashboard");
         }
 
-        if (isRegisterSuccess) {
-            toast.success("User Register Successfully");
-            dispatch(setUser({name: registerData.result.name, token: registerData.token}))
-            navigate("/dashboard");
-        }
-    }, [isLoginSuccess, isRegisterSuccess]);
+        // if (isSignUpSuccess) {
+        //     toast.success("User Register Successfully");
+        //     authenticateUser({accessToken: signUpData?.accessToken, refreshToken: signUpData?.refreshToken})
+        //     navigate("/dashboard");
+        // }
+    }, [isSignInSuccess, isSignUpSuccess]);
 
     useEffect(() => {
-        if (isLoginError) {
-            toast.error((loginError as any).data.message)
+        if (isSignInError) {
+            toast.error((signInError as any).data.message)
         }
 
-        if (isRegisterError) {
-            toast.error((registerError as any).data.message)
+        if (isSignUpError) {
+            toast.error((signUpError as any).data.message)
         }
-    }, [isLoginError, isRegisterError])
+    }, [isSignInError, isSignUpError])
 
     return (
         <section className='vh-100 gradient-app'>
@@ -102,60 +103,19 @@ const Auth = () => {
                                     </p>
                                     {showRegister && (
                                         <>
-                                            <div className="form-outline form-white mb-4">
-                                                <MDBInput
-                                                    type="text"
-                                                    name="firstName"
-                                                    value={firstName}
-                                                    onChange={handleChange}
-                                                    label="First Name"
-                                                    className="form-control form-control-lg"
-                                                />
-                                            </div>
-                                            <div className="form-outline form-white mb-4">
-                                                <MDBInput
-                                                    type="text"
-                                                    name="lastName"
-                                                    value={lastName}
-                                                    onChange={handleChange}
-                                                    label="Last Name"
-                                                    className="form-control form-control-lg"
-                                                />
-                                            </div>
+                                            <Input name="firstName" type="text" value={firstName} label="First Name"
+                                                   handle={handleChange}/>
+                                            <Input name="lastName" type="text" value={lastName} label="Last Name"
+                                                   handle={handleChange}/>
                                         </>
                                     )}
-                                    <div className="form-outline form-white mb-4">
-                                        <MDBInput
-                                            type="email"
-                                            name="email"
-                                            value={email}
-                                            onChange={handleChange}
-                                            label="Email"
-                                            className="form-control form-control-lg"
-                                        />
-                                    </div>
-                                    <div className="form-outline form-white mb-4">
-                                        <MDBInput
-                                            type="password"
-                                            name="password"
-                                            value={password}
-                                            onChange={handleChange}
-                                            label="Password"
-                                            className="form-control form-control-lg"
-                                        />
-                                    </div>
-                                    {showRegister && (
-                                        <div className="form-outline form-white mb-4">
-                                            <MDBInput
-                                                type="password"
-                                                name="confirmPassword"
-                                                value={confirmPassword}
-                                                onChange={handleChange}
-                                                label="Confirm Password"
-                                                className="form-control form-control-lg"
-                                            />
-                                        </div>
-                                    )}
+                                    <Input name="email" type="text" value={email} label="Email" handle={handleChange}/>
+                                    <Input name="password" type="password" value={password} label="Password"
+                                           handle={handleChange}/>
+                                    {showRegister &&
+                                        <Input name="confirmPassword" type="password" value={confirmPassword}
+                                               label="Confirm Password"
+                                               handle={handleChange}/>}
                                     {!showRegister ? (
                                         <button
                                             className="btn btn-outline-light btn-lg px-5"

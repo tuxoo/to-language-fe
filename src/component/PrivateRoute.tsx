@@ -1,11 +1,10 @@
 import React from "react";
-import {useSelector} from "react-redux";
-import {selectAuth} from "../store/slice/authSlice";
 import LoadingToRedirect from "./LoadingToRedirect";
+import {useAppSelector} from "../hook/hooks";
 
 const PrivateRoute = ({children}: { children: any }) => {
-    const {token} = useSelector(selectAuth);
-    return token ? children : <LoadingToRedirect/>;
+    const {accessToken} = useAppSelector(state => state.users);
+    return accessToken ? children : <LoadingToRedirect/>;
 }
 
 export default PrivateRoute;

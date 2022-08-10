@@ -1,18 +1,16 @@
 import React, {useEffect} from "react";
 import {Route, Routes} from "react-router-dom";
 import Auth from "./page/Auth";
-import {useAppDispatch} from "./hook/hooks";
-import {setUser} from "./store/slice/authSlice";
+import {useActions} from "./hook/hooks";
 import {ToastContainer} from "react-toastify";
 import PrivateRoute from "./component/PrivateRoute";
-import Dashboard from "./page/Dashboard";
 
 function App() {
-    const dispatch = useAppDispatch();
+    const {authenticateUser} = useActions();
     const user = JSON.parse(localStorage.getItem("user") || "{}")
 
     useEffect(() => {
-        dispatch(setUser(user))
+        authenticateUser(user)
     }, []);
 
     return (
@@ -21,7 +19,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Auth/>}/>
                 <Route path="/dashboard" element={<PrivateRoute>
-                    <Dashboard/>
+                    {/*<Dashboard/>*/}
                 </PrivateRoute>}/>
             </Routes>
         </>

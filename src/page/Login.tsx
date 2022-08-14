@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {useSignInUserMutation, useSignUpUserMutation} from "../store/users/users.api";
 import {toast} from "react-toastify";
 import Input from "../component/Input";
+import {MDBBtn} from "mdb-react-ui-kit";
 
 const initState = {
     firstName: "",
@@ -106,35 +107,53 @@ const Login = () => {
                                     </p>
                                     {showRegister && (
                                         <>
-                                            <Input name="firstName" type="text" value={firstName} label="First Name"
+                                            <Input name="firstName"
+                                                   type="text"
+                                                   value={firstName}
+                                                   label="First Name"
                                                    handle={handleChange}/>
-                                            <Input name="lastName" type="text" value={lastName} label="Last Name"
+                                            <Input name="lastName"
+                                                   type="text"
+                                                   value={lastName}
+                                                   label="Last Name"
                                                    handle={handleChange}/>
                                         </>
                                     )}
-                                    <Input name="email" type="text" value={email} label="Email" handle={handleChange}/>
-                                    <Input name="password" type="password" value={password} label="Password"
+                                    <Input name="email"
+                                           type="text"
+                                           value={email}
+                                           label="Email"
+                                           handle={handleChange}/>
+                                    <Input name="password"
+                                           type="password"
+                                           value={password}
+                                           label="Password"
                                            handle={handleChange}/>
                                     {showRegister &&
-                                        <Input name="confirmPassword" type="password" value={confirmPassword}
+                                        <Input name="confirmPassword"
+                                               type="password"
+                                               value={confirmPassword}
                                                label="Confirm Password"
                                                handle={handleChange}/>}
                                     {!showRegister ? (
-                                        <button
-                                            className="btn btn-outline-light btn-lg px-5"
-                                            type="button"
+                                        <MDBBtn
+                                            className='lg btn-outline-light btn-lg px-5'
+                                            color='dark'
+                                            type='button'
                                             onClick={() => handleLogin()}
+                                            active
                                         >
                                             Sign in
-                                        </button>
+                                        </MDBBtn>
                                     ) : (
-                                        <button
-                                            className="btn btn-outline-light btn-lg px-5"
-                                            type="button"
-                                            onClick={() => handleRegister()}
+                                        <MDBBtn
+                                            className='lg btn-outline-light btn-lg px-5'
+                                            color='dark'
+                                            type='button'
+                                            onClick={() => handleLogin()}
                                         >
                                             Register
-                                        </button>
+                                        </MDBBtn>
                                     )}
                                 </div>
                                 <div>
@@ -152,7 +171,7 @@ const Login = () => {
                                             </>
                                         ) : (
                                             <>
-                                                Already have an account ?
+                                                Already have an account?
                                                 <p
                                                     className="text-white-50 fw-bold"
                                                     style={{cursor: "pointer"}}

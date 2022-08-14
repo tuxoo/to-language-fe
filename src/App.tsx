@@ -6,6 +6,7 @@ import {ToastContainer} from "react-toastify";
 import PrivateRoute from "./component/PrivateRoute";
 import Courses from "./page/Courses";
 import Footer from "./component/Footer";
+import Header from "./component/Header";
 
 function App() {
     const {authenticateUser} = useActions();
@@ -17,6 +18,7 @@ function App() {
 
     return (
         <>
+            <Header/>
             <ToastContainer/>
             <Routes>
                 <Route path="/" element={<Login/>}/>

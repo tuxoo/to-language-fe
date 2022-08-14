@@ -4,7 +4,7 @@ import {SignInDto, SignUpDto, TokenContainer} from "../../model/model";
 export const usersApi = createApi({
     reducerPath: "users/api",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:8080/v1",
+        baseUrl: "http://localhost:8080/v1/users",
     }),
     endpoints: builder => ({
         signUpUser: builder.mutation<TokenContainer, SignUpDto>({
@@ -14,7 +14,7 @@ export const usersApi = createApi({
                 email: string,
                 password: string
             }) => ({
-                url: "/users/sign-up",
+                url: "/sign-up",
                 method: "post",
                 body,
             }),
@@ -24,7 +24,7 @@ export const usersApi = createApi({
                 email: string,
                 password: string
             }) => ({
-                url: "/users/sign-in",
+                url: "/sign-in",
                 method: "post",
                 body,
             }),

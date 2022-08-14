@@ -1,7 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {TokenContainer} from "../../model/model";
-
-const ACCESS_TOKEN = "access_token"
+import {ACCESS_TOKEN} from "../../model/const";
 
 export interface AuthState {
     accessToken: string;
@@ -12,7 +11,7 @@ const initialState: AuthState = {
 }
 
 export const usersSlice = createSlice({
-    name: "auth",
+    name: "user",
     initialState,
     reducers: {
         authenticateUser: (state, action: PayloadAction<TokenContainer>) => {

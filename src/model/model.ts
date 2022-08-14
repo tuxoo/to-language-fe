@@ -14,3 +14,8 @@ export interface TokenContainer {
     accessToken: string,
     refreshToken: string
 }
+
+export interface Page<T> {
+    page: number,
+    per_page: number
+}

@@ -7,6 +7,7 @@ import PrivateRoute from "./component/PrivateRoute";
 import Courses from "./page/Courses";
 import Footer from "./component/Footer";
 import Header from "./component/Header";
+import {ACCESS_TOKEN} from "./model/const";
 
 function App() {
     const {authenticateUser} = useActions();

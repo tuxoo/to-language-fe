@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
+import {useActions} from "../hook/hooks";
 import {useNavigate} from "react-router-dom";
 import {useSignInUserMutation, useSignUpUserMutation} from "../store/users/users.api";
 import {toast} from "react-toastify";
 import Input from "../component/Input";
-import {useActions} from "../hook/hooks";
 
 const initState = {
     firstName: "",
@@ -13,7 +13,7 @@ const initState = {
     confirmPassword: "",
 }
 
-const Auth = () => {
+const Login = () => {
     const [formValue, setFormValue] = useState(initState);
     const [showRegister, setShowRegister] = useState(false);
 
@@ -64,17 +64,20 @@ const Auth = () => {
     }
 
     useEffect(() => {
+
+        console.log(isSignInSuccess, isSignUpSuccess)
+
         if (isSignInSuccess) {
             toast.success("User Login Successfully");
             authenticateUser({accessToken: signInData?.accessToken ?? "", refreshToken: signInData?.accessToken ?? ""})
-            navigate("/dashboard");
+            navigate("/courses");
         }
 
-        // if (isSignUpSuccess) {
-        //     toast.success("User Register Successfully");
-        //     authenticateUser({accessToken: signUpData?.accessToken, refreshToken: signUpData?.refreshToken})
-        //     navigate("/dashboard");
-        // }
+        if (isSignUpSuccess) {
+            toast.success("User Register Successfully");
+            authenticateUser({accessToken: signUpData?.accessToken ?? "", refreshToken: signUpData?.refreshToken ?? ""})
+            navigate("/courses");
+        }
     }, [isSignInSuccess, isSignUpSuccess]);
 
     useEffect(() => {
@@ -170,4 +173,4 @@ const Auth = () => {
     )
 }
 
-export default Auth
+export default Login

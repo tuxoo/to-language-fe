@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {MDBModal, MDBModalContent, MDBModalDialog} from "mdb-react-ui-kit";
 
 const LoadingToRedirect = () => {
-    const [count, setCount] = useState(2);
+    const [count, setCount] = useState(1);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -11,7 +11,7 @@ const LoadingToRedirect = () => {
             setCount((current) => current - 1);
         }, 1000)
 
-        count === 0 && navigate("/auth");
+        count === 0 && navigate("/");
 
         return () => clearInterval(interval);
     }, [count, navigate]);

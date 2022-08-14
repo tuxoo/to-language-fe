@@ -1,9 +1,11 @@
 import React, {useEffect} from "react";
 import {Route, Routes} from "react-router-dom";
-import Auth from "./page/Auth";
+import Login from "./page/Login";
 import {useActions} from "./hook/hooks";
 import {ToastContainer} from "react-toastify";
 import PrivateRoute from "./component/PrivateRoute";
+import Courses from "./page/Courses";
+import Footer from "./component/Footer";
 
 function App() {
     const {authenticateUser} = useActions();
@@ -17,11 +19,14 @@ function App() {
         <>
             <ToastContainer/>
             <Routes>
-                <Route path="/" element={<Auth/>}/>
-                <Route path="/dashboard" element={<PrivateRoute>
-                    {/*<Dashboard/>*/}
-                </PrivateRoute>}/>
+                <Route path="/" element={<Login/>}/>
+                <Route path="/courses" element={
+                    <PrivateRoute>
+                        <Courses/>
+                    </PrivateRoute>
+                }/>
             </Routes>
+            <Footer/>
         </>
     );
 }

@@ -7,7 +7,7 @@ export const usersApi = createApi({
         baseUrl: "http://localhost:8080/v1",
     }),
     endpoints: builder => ({
-        signUpUser: builder.mutation<void, SignUpDto>({
+        signUpUser: builder.mutation<TokenContainer, SignUpDto>({
             query: (body: {
                 firstName: string,
                 lastName: string,

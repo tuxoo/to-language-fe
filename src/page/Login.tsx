@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useActions} from "../hook/hooks";
 import {useNavigate} from "react-router-dom";
-import {useSignInUserMutation, useSignUpUserMutation} from "../store/users/users.api";
+import {useSignInUserMutation, useSignUpUserMutation} from "../store/api/users.api";
 import {toast} from "react-toastify";
 import Input from "../component/Input";
 import {MDBBtn} from "mdb-react-ui-kit";
@@ -67,13 +67,13 @@ const Login = () => {
     useEffect(() => {
         if (isSignInSuccess) {
             toast.success("User Login Successfully");
-            authenticateUser({accessToken: signInData?.accessToken ?? "", refreshToken: signInData?.accessToken ?? ""})
+            authenticateUser({accessToken: signInData?.accessToken ?? "", refreshToken: signInData?.accessToken ?? ""});
             navigate("/courses");
         }
 
         if (isSignUpSuccess) {
             toast.success("User Register Successfully");
-            authenticateUser({accessToken: signUpData?.accessToken ?? "", refreshToken: signUpData?.refreshToken ?? ""})
+            authenticateUser({accessToken: signUpData?.accessToken ?? "", refreshToken: signUpData?.refreshToken ?? ""});
             navigate("/courses");
         }
     }, [isSignInSuccess, isSignUpSuccess]);

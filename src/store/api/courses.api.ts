@@ -1,6 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {ACCESS_TOKEN} from "../../model/const";
-import {ICourseResponse} from "../../model/interfaces/course/ICourseResponse";
+import {ICourse} from "../../model/interfaces/course/ICourse";
 
 const authHeader = () => {
     const accessToken = JSON.parse(localStorage.getItem(ACCESS_TOKEN) || "{}");
@@ -17,14 +17,14 @@ export const coursesApi = createApi({
         baseUrl: "http://localhost:8080/v1/courses",
     }),
     endpoints: builder => ({
-        getCourses: builder.query<ICourseResponse, void>({
+        getCourses: builder.query<ICourse[], void>({
             query: () => ({
                 url: "",
                 headers: authHeader(),
                 method: "get"
             }),
         }),
-        deleteCourse: builder.mutation<void, any>({
+        deleteCourse: builder.mutation<void, string>({
             query: (id) => ({
                 url: `/${id}`,
                 method: "delete"

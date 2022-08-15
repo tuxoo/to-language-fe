@@ -1,11 +1,13 @@
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 import {RootState} from "../store/store";
 import {bindActionCreators} from "@reduxjs/toolkit";
-import {usersActions} from "../store/users/users.slice";
+import {usersActions} from "../store/slice/users.slice";
+import {coursesActions} from "../store/slice/courses.slice";
 
 
 const actions = {
-    ...usersActions
+    ...usersActions,
+    ...coursesActions
 }
 
 export const useActions = () => {

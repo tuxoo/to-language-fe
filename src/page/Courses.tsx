@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import {useDeleteCourseMutation, useGetCoursesQuery} from "../store/api/courses.api";
 import {
     MDBBtn,
     MDBBtnGroup,
@@ -11,14 +10,13 @@ import {
     MDBCol,
     MDBRow
 } from "mdb-react-ui-kit";
-import {toast} from "react-toastify";
-import {useActions} from "../hook/hooks";
+import {useActions, useAppSelector} from "../hook/hooks";
+import Course from "../component/Course";
+import {useGetCoursesQuery} from "../store/api/courses.api";
 import {ICourse} from "../model/interfaces/course/ICourse";
 
 const Courses = () => {
-    const [courses, setCourses] = useState([])
-
-    const {removeCourse} = useActions();
+    const {courses} = useAppSelector(state => state.courses)
 
     const {
         data: getCourseData,
@@ -27,31 +25,12 @@ const Courses = () => {
         error: getCourseError,
     } = useGetCoursesQuery();
 
-    const [deleteCourse,
-        {
-            isSuccess: isDeleteCourseSuccess,
-            isError: isDeleteCourseError,
-            error: deleteCourseError,
-        }
-    ] = useDeleteCourseMutation();
-
-    const handleDeleteCourse = async (id: string) => {
-        await deleteCourse(id)
-    }
-
     useEffect(() => {
         if (isGetCoursesSuccess) {
-            // @ts-ignore
-            setCourses(oldArray => [...oldArray, ...getCourseData])
+            getCourseData as ICourse[]
+            courses.push(getCourseData[0] as ICourse)
         }
-    })
-
-    useEffect(() => {
-        if (isDeleteCourseSuccess) {
-            toast.success("Course Delete Successfully");
-            removeCourse("62f952bd4eeb8d089a589cdf")
-        }
-    })
+    }, [isGetCoursesSuccess, getCourseData])
 
     return (
         <section className="vh-100 gradient-app">
@@ -61,34 +40,7 @@ const Courses = () => {
                         <div className="card-body p-4 text-center">
                             <div className="mb-md-5 mt-md-4 pb-5">
                                 <MDBRow>
-                                    {getCourseData?.map(course => (
-                                        <MDBCol sm='6'>
-                                            <MDBCard background='dark' className='text-white px-8 py-4 mb-2 mt-2'>
-                                                <MDBCardHeader>{course.startedAt}</MDBCardHeader>
-                                                <MDBCardBody>
-                                                    <MDBCardTitle>{course.language}</MDBCardTitle>
-                                                    <MDBCardText>
-                                                        Some quick example text to build on the card title and make up
-                                                        the bulk of the card's content.
-                                                        {/*{course.description}*/}
-                                                    </MDBCardText>
-                                                    <MDBBtnGroup size='lg'>
-                                                        <MDBBtn
-                                                            className='btn-outline-light px-5'
-                                                            color='dark'
-                                                            type='button'
-                                                        >Edit</MDBBtn>
-                                                        <MDBBtn
-                                                            className='btn-outline-light px-5'
-                                                            color='dark'
-                                                            type='button'
-                                                            onClick={() => handleDeleteCourse(course.id)}
-                                                        >Delete</MDBBtn>
-                                                    </MDBBtnGroup>
-                                                </MDBCardBody>
-                                            </MDBCard>
-                                        </MDBCol>
-                                    ))}
+                                    {courses.map(course => (<Course course={course} key={course.id}/>))}
                                 </MDBRow>
                             </div>
                         </div>

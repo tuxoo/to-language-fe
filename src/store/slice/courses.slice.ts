@@ -7,19 +7,38 @@ export interface CoursesState {
 
 const initialState: CoursesState = {
     courses: []
+    // courses: [
+    //     {
+    //         "id": "62f952b84eeb8d089a589cdc",
+    //         "language": "RU",
+    //         "description": "",
+    //         "startedAt": "2022-08-14T19:53:28.235Z"
+    //     },
+    //     {
+    //         "id": "62f952b84eeb8d089a589cdd",
+    //         "language": "RU",
+    //         "description": "",
+    //         "startedAt": "2022-08-14T19:53:28.821Z"
+    //     },
+    //     {
+    //         "id": "62f952b94eeb8d089a589cde",
+    //         "language": "RU",
+    //         "description": "",
+    //         "startedAt": "2022-08-14T19:53:29.326Z"
+    //     }
+    // ]
 }
 
 export const coursesSlice = createSlice({
     name: "courses",
     initialState,
     reducers: {
+        addCourse: (state, action: PayloadAction<ICourse>) => {
+            state.courses.push(action.payload)
+        },
         removeCourse: (state, action: PayloadAction<string>) => {
-            const id = action.payload;
-            const existingCourses = state.courses.find(course => course.id !== id)
-            if (existingCourses) {
-                state.courses.filter(course => course.id !== id)
-            }
-        }
+            state.courses = state.courses.filter(course => course.id !== action.payload)
+        },
     }
 })
 

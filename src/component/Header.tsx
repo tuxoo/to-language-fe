@@ -8,9 +8,6 @@ import {
     MDBNavbarBrand,
     MDBNavbarNav
 } from 'mdb-react-ui-kit';
-import {useActions} from "../hook/hooks";
-import {toast} from "react-toastify";
-import {useNavigate} from "react-router-dom";
 
 // const handleLogout = () => {
 //     dispatch(logout());
@@ -19,15 +16,6 @@ import {useNavigate} from "react-router-dom";
 // }
 
 const Header = () => {
-    const {logoutUser} = useActions()
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        logoutUser();
-        toast.success("User Logout Successfully");
-        navigate("/");
-    }
-
     return (
         <MDBNavbar expand='lg' dark bgColor='dark'>
             <MDBContainer fluid>
@@ -72,7 +60,7 @@ const Header = () => {
                             color='dark'
                             type='button'
                             active
-                            onClick={() => handleLogout()}
+                            // onClick={() => handleLogout()}
                         >Logout</MDBBtn>
                     </MDBInputGroup>
                 </MDBCollapse>

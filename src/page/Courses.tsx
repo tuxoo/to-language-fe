@@ -1,36 +1,19 @@
 import React, {useEffect, useState} from "react";
-import {
-    MDBBtn,
-    MDBBtnGroup,
-    MDBCard,
-    MDBCardBody,
-    MDBCardHeader,
-    MDBCardText,
-    MDBCardTitle,
-    MDBCol,
-    MDBRow
-} from "mdb-react-ui-kit";
-import {useActions, useAppSelector} from "../hook/hooks";
-import Course from "../component/Course";
-import {useGetCoursesQuery} from "../store/api/courses.api";
-import {ICourse} from "../model/interfaces/course/ICourse";
+import {MDBRow} from "mdb-react-ui-kit";
+import {courseService} from "../service/course-service";
+import {Course} from "../model/course.model";
 
 const Courses = () => {
-    const {courses} = useAppSelector(state => state.courses)
-
-    const {
-        data: getCourseData,
-        isSuccess: isGetCoursesSuccess,
-        isLoading: isGetCoursesLoading,
-        error: getCourseError,
-    } = useGetCoursesQuery();
+    const [courses, setCourses] = useState<Course[]>([]);
 
     useEffect(() => {
-        if (isGetCoursesSuccess) {
-            getCourseData as ICourse[]
-            courses.push(getCourseData[0] as ICourse)
+        async function fetchCourses() {
+            const response = await courseService.getCourses();
+            setCourses(response.data);
         }
-    }, [isGetCoursesSuccess, getCourseData])
+
+        fetchCourses();
+    }, []);
 
     return (
         <section className="vh-100 gradient-app">
@@ -40,7 +23,7 @@ const Courses = () => {
                         <div className="card-body p-4 text-center">
                             <div className="mb-md-5 mt-md-4 pb-5">
                                 <MDBRow>
-                                    {courses.map(course => (<Course course={course} key={course.id}/>))}
+                                    {/*{courses.map(course => (<Course course={course} key={course.id}/>))}*/}
                                 </MDBRow>
                             </div>
                         </div>

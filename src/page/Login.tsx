@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from "react";
-import {useActions} from "../hook/hooks";
-import {useNavigate} from "react-router-dom";
-import {useSignInUserMutation, useSignUpUserMutation} from "../store/api/users.api";
+import React, {useState} from "react";
 import {toast} from "react-toastify";
 import Input from "../component/Input";
 import {MDBBtn} from "mdb-react-ui-kit";
+import {useAppDispatch} from "../hook/hooks";
+import {signIn} from "../store/slice/user.slice";
 
 const initState = {
     firstName: "",
@@ -15,30 +14,11 @@ const initState = {
 }
 
 const Login = () => {
+
+    const dispatch = useAppDispatch();
+
     const [formValue, setFormValue] = useState(initState);
     const [showRegister, setShowRegister] = useState(false);
-
-    const {authenticateUser} = useActions();
-
-    const navigate = useNavigate();
-
-    const [signInUser,
-        {
-            data: signInData,
-            isSuccess: isSignInSuccess,
-            isError: isSignInError,
-            error: signInError,
-        }
-    ] = useSignInUserMutation();
-
-    const [signUpUser,
-        {
-            data: signUpData,
-            isSuccess: isSignUpSuccess,
-            isError: isSignUpError,
-            error: signUpError,
-        }
-    ] = useSignUpUserMutation();
 
     const {firstName, lastName, email, password, confirmPassword} = formValue;
 
@@ -47,46 +27,55 @@ const Login = () => {
     };
 
     const handleLogin = async () => {
+        // if (email && password) {
+        //     await signInUser({email, password});
+        // } else {
+        //     toast.error("Please fill all input fields")
+        // }
+
         if (email && password) {
-            await signInUser({email, password});
+            dispatch(signIn({email, password}))
         } else {
             toast.error("Please fill all input fields")
         }
     }
 
-    const handleRegister = async () => {
-        if (password !== confirmPassword) {
-            return toast.error("Password doesn't match");
-        }
-
-        if (firstName && lastName && password && email) {
-            await signUpUser({firstName, lastName, email, password});
-        }
-    }
-
-    useEffect(() => {
-        if (isSignInSuccess) {
-            toast.success("User Login Successfully");
-            authenticateUser({accessToken: signInData?.accessToken ?? "", refreshToken: signInData?.accessToken ?? ""});
-            navigate("/courses");
-        }
-
-        if (isSignUpSuccess) {
-            toast.success("User Register Successfully");
-            authenticateUser({accessToken: signUpData?.accessToken ?? "", refreshToken: signUpData?.refreshToken ?? ""});
-            navigate("/courses");
-        }
-    }, [isSignInSuccess, isSignUpSuccess]);
-
-    useEffect(() => {
-        if (isSignInError) {
-            toast.error((signInError as any).data.message)
-        }
-
-        if (isSignUpError) {
-            toast.error((signUpError as any).data.message)
-        }
-    }, [isSignInError, isSignUpError])
+    // const handleRegister = async () => {
+    //     if (password !== confirmPassword) {
+    //         return toast.error("Password doesn't match");
+    //     }
+    //
+    //     if (firstName && lastName && password && email) {
+    //         await signUpUser({firstName, lastName, email, password});
+    //     }
+    // }
+    //
+    // useEffect(() => {
+    //     if (isSignInSuccess) {
+    //         toast.success("User Login Successfully");
+    //         authenticateUser({accessToken: signInData?.accessToken ?? "", refreshToken: signInData?.accessToken ?? ""});
+    //         navigate("/courses");
+    //     }
+    //
+    //     if (isSignUpSuccess) {
+    //         toast.success("User Register Successfully");
+    //         authenticateUser({
+    //             accessToken: signUpData?.accessToken ?? "",
+    //             refreshToken: signUpData?.refreshToken ?? ""
+    //         });
+    //         navigate("/courses");
+    //     }
+    // }, [isSignInSuccess, isSignUpSuccess]);
+    //
+    // useEffect(() => {
+    //     if (isSignInError) {
+    //         toast.error((signInError as any).data.message)
+    //     }
+    //
+    //     if (isSignUpError) {
+    //         toast.error((signUpError as any).data.message)
+    //     }
+    // }, [isSignInError, isSignUpError])
 
     return (
         <section className='vh-100 gradient-app'>
@@ -147,7 +136,7 @@ const Login = () => {
                                             className='lg btn-outline-light btn-lg px-5'
                                             color='dark'
                                             type='button'
-                                            onClick={() => handleRegister()}
+                                            // onClick={() => handleRegister()}
                                         >
                                             Register
                                         </MDBBtn>

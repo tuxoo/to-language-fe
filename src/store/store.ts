@@ -1,21 +1,20 @@
-import {configureStore} from "@reduxjs/toolkit";
-import {usersApi} from "./api/users.api";
-import {setupListeners} from "@reduxjs/toolkit/query";
-import {usersReducer} from "./slice/users.slice";
-import {coursesApi} from "./api/courses.api";
-import {coursesReducer} from "./slice/courses.slice";
+import {Action, combineReducers, configureStore, ThunkAction} from '@reduxjs/toolkit';
+import {createBrowserHistory} from 'history';
+import userReducer from './slice/user.slice';
+import {connectRouter, routerMiddleware} from "connected-react-router";
 
-export const store = configureStore({
-    reducer: {
-        [usersApi.reducerPath]: usersApi.reducer,
-        [coursesApi.reducerPath]: coursesApi.reducer,
-        users: usersReducer,
-        courses: coursesReducer
-    },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([usersApi.middleware, coursesApi.middleware])
+export const history = createBrowserHistory();
+
+export const rootReducer = combineReducers({
+    userReducer,
+    router: connectRouter(history)
 });
 
-setupListeners(store.dispatch);
+export const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(routerMiddleware(history)),
+});
 
 export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;

@@ -9,18 +9,17 @@ import {
     MDBCardTitle,
     MDBCol
 } from "mdb-react-ui-kit";
-import {ICourse} from "../model/interfaces/course/ICourse";
-import {useActions} from "../hook/hooks";
+import {Course} from "../model/course.model";
 
 interface CourseProps {
-    course: ICourse
+    course: Course
 }
 
 const Course = ({course}: CourseProps) => {
-    const {removeCourse} = useActions();
+    // const {removeCourse} = useActions();
 
     const handleDeleteCourse = async (id: string) => {
-        await removeCourse(id)
+        // await removeCourse(id)
     }
 
     return (

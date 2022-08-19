@@ -27,12 +27,6 @@ const Login = () => {
     };
 
     const handleLogin = async () => {
-        // if (email && password) {
-        //     await signInUser({email, password});
-        // } else {
-        //     toast.error("Please fill all input fields")
-        // }
-
         if (email && password) {
             dispatch(signIn({email, password}))
         } else {
@@ -50,32 +44,6 @@ const Login = () => {
     //     }
     // }
     //
-    // useEffect(() => {
-    //     if (isSignInSuccess) {
-    //         toast.success("User Login Successfully");
-    //         authenticateUser({accessToken: signInData?.accessToken ?? "", refreshToken: signInData?.accessToken ?? ""});
-    //         navigate("/courses");
-    //     }
-    //
-    //     if (isSignUpSuccess) {
-    //         toast.success("User Register Successfully");
-    //         authenticateUser({
-    //             accessToken: signUpData?.accessToken ?? "",
-    //             refreshToken: signUpData?.refreshToken ?? ""
-    //         });
-    //         navigate("/courses");
-    //     }
-    // }, [isSignInSuccess, isSignUpSuccess]);
-    //
-    // useEffect(() => {
-    //     if (isSignInError) {
-    //         toast.error((signInError as any).data.message)
-    //     }
-    //
-    //     if (isSignUpError) {
-    //         toast.error((signUpError as any).data.message)
-    //     }
-    // }, [isSignInError, isSignUpError])
 
     return (
         <section className='vh-100 gradient-app'>

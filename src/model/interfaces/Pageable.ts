@@ -1,8 +1,8 @@
-import { ISort } from './ISort';
+import { Sort } from './Sort';
 
-export interface IPageable {
+export interface Pageable {
     offset: number,
-    sort: ISort,
+    sort: Sort,
     pageNumber: number,
     pageSize: number,
     paged: boolean,

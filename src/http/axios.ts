@@ -1,4 +1,5 @@
 import axios, {AxiosRequestConfig} from 'axios';
+import {localStorageService} from "../service/local-storage.service";
 
 export const AUTHORIZATION_HEADER = 'Authorization';
 
@@ -15,7 +16,7 @@ const authInterceptor = (config: AxiosRequestConfig): AxiosRequestConfig => {
     if (config.headers === undefined) {
         config.headers = {}
     }
-    config.headers[AUTHORIZATION_HEADER] = `Bearer ${localStorage.getItem('jwt')}`;
+    config.headers[AUTHORIZATION_HEADER] = `Bearer ${localStorageService.getAccessToken()}`;
     return config;
 };
 

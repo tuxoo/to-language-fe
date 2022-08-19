@@ -1,4 +1,4 @@
-export interface Sort {
+export interface SortModel {
     sorted: boolean,
     unsorted: boolean,
     empty: boolean

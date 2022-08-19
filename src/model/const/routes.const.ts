@@ -1,1 +1,0 @@
-export const COURSES_ROUTE = '/courses';

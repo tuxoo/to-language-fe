@@ -1,4 +1,4 @@
-export interface Pagination {
+export interface PaginationModel {
     page: number,
     size: number,
     sort: string,

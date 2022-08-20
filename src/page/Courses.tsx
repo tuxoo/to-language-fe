@@ -15,7 +15,7 @@ const Courses = () => {
     return (
         <section className="vh-100 gradient-app">
             <div className="container py-4 px-4 h-100">
-                <div className="row d-flex justify-content-center align-items-center">
+                <div className="row d-flex justify-content-center align-items-center h-20">
                     <div className="col-12 col-md-8 col-lg-8 col-xl-10">
                         <div className="card-body p-4 text-center">
                             <div className="mb-md-5 mt-md-4 pb-5">

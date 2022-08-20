@@ -50,13 +50,13 @@ const Login = () => {
             <div className="container py-4 h-100">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-                        <div className="card bg-dark text-white">
+                        <div className="card bg-light text-dark">
                             <div className="card-body p-4 text-center">
                                 <div className="mb-md-5 mt-md-4 pb-5">
                                     <h2 className="fw-bold mb-2">
                                         {!showRegister ? "Sign in to ToLanguage" : "Sign up to ToLanguage"}
                                     </h2>
-                                    <p className="text-white-50 mb-4">
+                                    <p className="text-dark-50 mb-4">
                                         {!showRegister ? "Please enter your Email and Password" : "Please enter user details"}
                                     </p>
                                     {showRegister && (
@@ -74,7 +74,7 @@ const Login = () => {
                                         </>
                                     )}
                                     <Input name="email"
-                                           type="text"
+                                           type="email"
                                            value={email}
                                            label="Email"
                                            handle={handleChange}/>
@@ -91,8 +91,8 @@ const Login = () => {
                                                handle={handleChange}/>}
                                     {!showRegister ? (
                                         <MDBBtn
-                                            className='lg btn-outline-light btn-lg px-5'
-                                            color='dark'
+                                            className='lg btn-outline-dark btn-lg px-5'
+                                            color='light'
                                             type='button'
                                             onClick={() => handleLogin()}
                                             active
@@ -101,8 +101,8 @@ const Login = () => {
                                         </MDBBtn>
                                     ) : (
                                         <MDBBtn
-                                            className='lg btn-outline-light btn-lg px-5'
-                                            color='dark'
+                                            className='lg btn-outline-dark btn-lg px-5'
+                                            color='light'
                                             type='button'
                                             // onClick={() => handleRegister()}
                                         >
@@ -116,7 +116,7 @@ const Login = () => {
                                             <>
                                                 Don't have an account?
                                                 <p
-                                                    className="text-white-50 fw-bold"
+                                                    className="text-dark-50 fw-bold"
                                                     style={{cursor: "pointer"}}
                                                     onClick={() => setShowRegister(true)}
                                                 >
@@ -127,7 +127,7 @@ const Login = () => {
                                             <>
                                                 Already have an account?
                                                 <p
-                                                    className="text-white-50 fw-bold"
+                                                    className="text-dark-50 fw-bold"
                                                     style={{cursor: "pointer"}}
                                                     onClick={() => setShowRegister(false)}
                                                 >

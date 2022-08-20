@@ -3,7 +3,7 @@ import {MDBBtn, MDBCol, MDBContainer, MDBFooter, MDBInput, MDBRow} from 'mdb-rea
 
 const Footer = () => {
     return (
-        <MDBFooter className='text-center bg-dark text-white'>
+        <MDBFooter className='text-center bg-light'>
             <MDBContainer className='p-4'>
                 <section className='mt-2'>
                     <form action=''>
@@ -15,11 +15,11 @@ const Footer = () => {
                             </MDBCol>
 
                             <MDBCol size="auto">
-                                <MDBInput contrast type='email' label='Email address' className='mb-2'/>
+                                <MDBInput type='email' label='Email address' className='mb-2'/>
                             </MDBCol>
 
                             <MDBCol size="auto">
-                                <MDBBtn outline color='light' type='submit' className='mb-2'>
+                                <MDBBtn outline color='dark' type='submit' className='mb-2'>
                                     Subscribe
                                 </MDBBtn>
                             </MDBCol>
@@ -29,8 +29,6 @@ const Footer = () => {
                 <section className='mb-4 mt-4'>
                     <MDBRow className='justify-content-center'>
                         <MDBCol lg='6' md='12' className='mb-4 mb-md-0'>
-                            <h5 className='text-uppercase'>Footer text</h5>
-
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis molestias.
                                 Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam voluptatem veniam,
@@ -39,12 +37,18 @@ const Footer = () => {
                         </MDBCol>
                     </MDBRow>
                 </section>
-                <div className='text-center p-1 mt-2'>
-                    © 2022 Copyright:
-                    <a className='text-white' href='https://to-language.com/'>
-                        ToLanguage.com
-                    </a>
-                </div>
+                <section>
+                    <MDBRow className='justify-content-center'>
+                        <MDBCol lg='6' md='12' className='mb-4 mb-md-0'>
+                            <p className='p-1 mt-1'>
+                                © 2022 Copyright:
+                                <a className='text-dark' href='https://to-language.com/'>
+                                    ToLanguage.com
+                                </a>
+                            </p>
+                        </MDBCol>
+                    </MDBRow>
+                </section>
             </MDBContainer>
         </MDBFooter>
     );

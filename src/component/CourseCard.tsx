@@ -3,7 +3,7 @@ import {
     MDBBtn,
     MDBBtnGroup,
     MDBCard,
-    MDBCardBody,
+    MDBCardBody, MDBCardFooter,
     MDBCardHeader,
     MDBCardText,
     MDBCardTitle,
@@ -11,7 +11,7 @@ import {
 } from "mdb-react-ui-kit";
 import {Course} from "../model/course.model";
 import {useAppDispatch} from "../hook/hooks";
-import {deleteCourse} from "../store/slice/course.slice";
+import {deleteCourse, editCourse} from "../store/slice/course.slice";
 
 interface CourseProps {
     course: Course
@@ -25,38 +25,40 @@ const CourseCard = ({course}: CourseProps) => {
     }
 
     const handleEditCourse = async (id: string) => {
-        // dispatch(editCourse({
-        //     id: id,
-        //     language: 'EN',
-        //     description: 'Hello React',
-        //     startedAt: '2022-08-11T20:04:43.888+00:00'
-        // }))
+        dispatch(editCourse({
+            id: id,
+            language: 'EN',
+            description: 'Hello React asdfasdf asdf asdfasdf asdfasdf asdfasd fasdf asdf asdfa sdf asdf as dfa sd',
+            startedAt: '2022-08-11T20:04:43.888+00:00'
+        }))
     }
 
     return (
         <MDBCol>
-            <MDBCard background='dark' className='text-white px-8 py-4 mb-2 mt-2' alignment='center'>
+            <MDBCard shadow='0' border='dark' className='px-8 py-4 mb-2 mt-2 h-100' alignment='center'>
                 <MDBCardHeader>{course.startedAt}</MDBCardHeader>
-                <MDBCardBody>
+                <MDBCardBody className='text-dark'>
                     <MDBCardTitle>{course.language}</MDBCardTitle>
-                    <MDBCardText>
+                    <MDBCardText className='px-8 py-4 mb-2 mt-2'>
                         {course.description}
                     </MDBCardText>
-                    <MDBBtnGroup size='lg'>
+                </MDBCardBody>
+                <MDBCardFooter border=''>
+                    <MDBBtnGroup size='lg' className=''>
                         <MDBBtn
-                            className='btn-outline-light px-5'
-                            color='dark'
+                            className='px-5'
+                            color='light'
                             type='button'
                             onClick={() => handleEditCourse(course.id)}
                         >Edit</MDBBtn>
                         <MDBBtn
-                            className='btn-outline-light px-5'
-                            color='dark'
+                            className='px-5'
+                            color='light'
                             type='button'
                             onClick={() => handleDeleteCourse(course.id)}
                         >Delete</MDBBtn>
                     </MDBBtnGroup>
-                </MDBCardBody>
+                </MDBCardFooter>
             </MDBCard>
         </MDBCol>
     )

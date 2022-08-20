@@ -30,7 +30,7 @@ const signIn = createAsyncThunk<User, SignInRequest, { rejectValue: ApiError }>(
         try {
             const response = await authService.signIn(request)
             localStorageService.setAccessToken(response.data.accessToken)
-            // thunkAPI.dispatch(push('/courses'));
+            thunkApi.dispatch(push('/courses'));
             return response.data.user
         } catch (error: any) {
             const err: ApiError = {message: error.response.data} // TODO: add another fields

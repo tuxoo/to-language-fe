@@ -16,8 +16,8 @@ class CourseService {
         return authHost.get<Course>(`/v1/courses/${id}`)
     }
 
-    public editCourse(id: string, newCourse: Course): AxiosPromise<Course> {
-        return authHost.patch<Course>(`/v1/courses/${id}`, newCourse)
+    public editCourse(id: string, course: Course): AxiosPromise<Course> {
+        return authHost.patch<Course>(`/v1/courses/${id}`, course)
     }
 
     public deleteCourse(id: string) {
@@ -25,4 +25,4 @@ class CourseService {
     }
 }
 
-export const courseService = new CourseService();
+export const courseService = new CourseService()

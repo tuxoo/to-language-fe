@@ -3,7 +3,8 @@ import {toast} from "react-toastify";
 import Input from "../component/Input";
 import {MDBBtn} from "mdb-react-ui-kit";
 import {useAppDispatch} from "../hook/hooks";
-import {signIn} from "../store/slice/user.slice";
+import {signIn, signUp} from "../store/slice/user.slice";
+import {useNavigate} from "react-router-dom";
 
 const initState = {
     firstName: "",
@@ -14,7 +15,7 @@ const initState = {
 }
 
 const Login = () => {
-
+    const navigate = useNavigate()
     const dispatch = useAppDispatch();
 
     const [formValue, setFormValue] = useState(initState);
@@ -28,22 +29,21 @@ const Login = () => {
 
     const handleLogin = async () => {
         if (email && password) {
-            dispatch(signIn({email, password}))
+            await dispatch(signIn({email, password}))
         } else {
             toast.error("Please fill all input fields")
         }
     }
 
-    // const handleRegister = async () => {
-    //     if (password !== confirmPassword) {
-    //         return toast.error("Password doesn't match");
-    //     }
-    //
-    //     if (firstName && lastName && password && email) {
-    //         await signUpUser({firstName, lastName, email, password});
-    //     }
-    // }
-    //
+    const handleRegister = async () => {
+        if (password !== confirmPassword) {
+            return toast.error("Password doesn't match");
+        }
+
+        if (firstName && lastName && password && email) {
+            await dispatch(signUp({firstName, lastName, email, password}))
+        }
+    }
 
     return (
         <section className='vh-100 gradient-app'>
@@ -104,7 +104,7 @@ const Login = () => {
                                             className='lg btn-outline-dark btn-lg px-5'
                                             color='light'
                                             type='button'
-                                            // onClick={() => handleRegister()}
+                                            onClick={() => handleRegister()}
                                         >
                                             Register
                                         </MDBBtn>

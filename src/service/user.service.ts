@@ -20,16 +20,13 @@ export interface LoginResponse {
     user: User,
 }
 
-const SIGN_IN_URL = 'v1/users/sign-in';
-const SIGN_UP_URL = 'v1/users/sign-up';
-
 class AuthService {
     public signIn(signInRequest: SignInRequest): AxiosPromise<LoginResponse> {
-        return host.post<LoginResponse>(SIGN_IN_URL, signInRequest)
+        return host.post<LoginResponse>('v1/users/sign-in', signInRequest)
     }
 
     public signUp(signUpRequest: SignUpRequest): AxiosPromise<LoginResponse> {
-        return host.post<LoginResponse>(SIGN_UP_URL, signUpRequest)
+        return host.post<LoginResponse>('v1/users/sign-up', signUpRequest)
     }
 }
 

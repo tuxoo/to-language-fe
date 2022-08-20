@@ -5,7 +5,6 @@ import {localStorageService} from "../../service/local-storage.service";
 import {User} from "../../model/user.model";
 import {push} from "connected-react-router";
 import {toast} from "react-toastify";
-import {useAppDispatch} from "../../hook/hooks";
 
 interface UserSliceState {
     isAuthenticated: boolean;
@@ -45,7 +44,6 @@ const signUp = createAsyncThunk<User, SignUpRequest, { rejectValue: ApiError }>(
         try {
             const response = await authService.signUp(request)
             localStorageService.setAccessToken(response.data.accessToken)
-            const dispatch = useAppDispatch();
             thunkApi.dispatch(push('/courses'));
             return response.data.user
         } catch (error: any) {

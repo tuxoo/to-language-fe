@@ -1,27 +1,28 @@
-import {Course} from "../model/course.model";
 import {authHost} from "../http/axios";
 import {AxiosPromise} from "axios";
+import {Rule} from "../model/rule.model";
+import {Page} from "../model/pagination/page.model";
 
 class RuleService {
-    public addCourse(course: Course) {
-        return authHost.post('/v1/courses')
+    public addCourse(courseId: string, rule: Rule) {
+        return authHost.post(`/v1/courses/${courseId}/rules`, rule)
     }
 
-    public getCourses(): AxiosPromise<Course[]> {
-        return authHost.get<Course[]>('/v1/courses')
+    public getCourses(courseId: string): AxiosPromise<Page<Rule>> {
+        return authHost.get<Page<Rule>>(`/v1/courses/${courseId}`)
     }
 
-    public getCourse(id: string): AxiosPromise<Course> {
-        return authHost.get<Course>(`/v1/courses/${id}`)
+    public getCourse(courseId: string, id: string): AxiosPromise<Rule> {
+        return authHost.get<Rule>(`/v1/courses/${courseId}/rules/${id}`)
     }
 
-    public editCourse(id: string, newCourse: Course): AxiosPromise<Course> {
-        return authHost.patch<Course>(`/v1/courses/${id}`, newCourse)
+    public editCourse(courseId: string, id: string, rule: Rule): AxiosPromise<Rule> {
+        return authHost.patch<Rule>(`/v1/courses/${courseId}/rules/${id}`, rule)
     }
 
-    public deleteCourse(id: string) {
-        return authHost.delete(`/v1/courses/${id}`)
+    public deleteCourse(courseId: string, id: string) {
+        return authHost.delete(`/v1/courses/${courseId}/rules/${id}`)
     }
 }
 
-export const courseService = new RuleService();
+export const ruleService = new RuleService()

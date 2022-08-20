@@ -2,6 +2,7 @@ import {Action, combineReducers, configureStore, ThunkAction} from '@reduxjs/too
 import {createBrowserHistory} from 'history';
 import userReducer from './slice/user.slice';
 import coursesReducer from './slice/course.slice';
+import notesReducer from './slice/note.slice';
 import {connectRouter, routerMiddleware} from "connected-react-router";
 
 export const history = createBrowserHistory();
@@ -9,6 +10,7 @@ export const history = createBrowserHistory();
 export const rootReducer = combineReducers({
     userReducer,
     coursesReducer,
+    notesReducer,
     router: connectRouter(history)
 });
 

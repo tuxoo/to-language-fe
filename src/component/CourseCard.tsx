@@ -3,7 +3,8 @@ import {
     MDBBtn,
     MDBBtnGroup,
     MDBCard,
-    MDBCardBody, MDBCardFooter,
+    MDBCardBody,
+    MDBCardFooter,
     MDBCardHeader,
     MDBCardText,
     MDBCardTitle,
@@ -11,7 +12,7 @@ import {
 } from "mdb-react-ui-kit";
 import {Course} from "../model/course.model";
 import {useAppDispatch} from "../hook/hooks";
-import {deleteCourse, editCourse} from "../store/slice/course.slice";
+import {deleteCourse, editCourse, getCourse} from "../store/slice/course.slice";
 
 interface CourseProps {
     course: Course
@@ -33,6 +34,10 @@ const CourseCard = ({course}: CourseProps) => {
         }))
     }
 
+    const handleCourse = async (id: string) => {
+        dispatch(getCourse(id))
+    }
+
     return (
         <MDBCol>
             <MDBCard shadow='0' border='dark' className='px-8 py-4 mb-2 mt-2 h-100' alignment='center'>
@@ -41,6 +46,17 @@ const CourseCard = ({course}: CourseProps) => {
                     <MDBCardTitle>{course.language}</MDBCardTitle>
                     <MDBCardText className='px-8 py-4 mb-2 mt-2'>
                         {course.description}
+                        {/*<MDBBtn tag="a" href="#!" className="stretched-link">Go somewhere</MDBBtn>*/}
+                        {/*<a*/}
+                        {/*    className="stretched-link"*/}
+                        {/*    onClick={() => handleCourse(course.id)}*/}
+                        {/*>img</a>*/}
+                        <MDBBtn
+                            className='px-5'
+                            color='light'
+                            type='button'
+                            onClick={() => handleCourse(course.id)}
+                        >Course</MDBBtn>
                     </MDBCardText>
                 </MDBCardBody>
                 <MDBCardFooter border=''>
@@ -57,6 +73,12 @@ const CourseCard = ({course}: CourseProps) => {
                             type='button'
                             onClick={() => handleDeleteCourse(course.id)}
                         >Delete</MDBBtn>
+                        {/*<MDBBtn*/}
+                        {/*    className='px-5'*/}
+                        {/*    color='light'*/}
+                        {/*    type='button'*/}
+                        {/*    onClick={() => handleToNote(course.id)}*/}
+                        {/*>ToNotes</MDBBtn>*/}
                     </MDBBtnGroup>
                 </MDBCardFooter>
             </MDBCard>

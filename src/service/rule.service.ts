@@ -1,9 +1,8 @@
-import {authHost} from "../http/axios";
 import {Course} from "../model/course.model";
+import {authHost} from "../http/axios";
 import {AxiosPromise} from "axios";
 
-
-class CourseService {
+class RuleService {
     public addCourse(course: Course) {
         return authHost.post('/v1/courses')
     }
@@ -25,4 +24,4 @@ class CourseService {
     }
 }
 
-export const courseService = new CourseService();
+export const courseService = new RuleService();

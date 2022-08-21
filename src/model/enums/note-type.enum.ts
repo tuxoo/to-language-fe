@@ -1,1 +1,0 @@
-export type NoteTypeEnum = "EXP" | "WORD"

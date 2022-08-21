@@ -1,0 +1,7 @@
+export type LanguageEnum = 'RU'
+    | 'EN'
+    | 'FR'
+    | 'ES'
+    | 'IT'
+    | 'ZH'
+    | 'DE'

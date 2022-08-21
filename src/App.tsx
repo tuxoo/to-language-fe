@@ -19,7 +19,7 @@ function App() {
                 <Route path="/courses/:courseId" element={<Course/>}/>
                 <Route path="/courses/:courseId/notes/" element={<Notes/>}/>
             </Routes>
-            <Footer/>
+            {/*<Footer/>*/}
         </>
     );
 }

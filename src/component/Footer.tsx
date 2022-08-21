@@ -4,7 +4,7 @@ import {MDBBtn, MDBCol, MDBContainer, MDBFooter, MDBInput, MDBRow} from 'mdb-rea
 const Footer = () => {
     return (
         <MDBFooter className='text-center bg-light'>
-            <MDBContainer className='p-4'>
+            <MDBContainer className='p-2'>
                 <section className='mt-2'>
                     <form action=''>
                         <MDBRow className='d-flex justify-content-center'>
@@ -26,13 +26,11 @@ const Footer = () => {
                         </MDBRow>
                     </form>
                 </section>
-                <section className='mb-4 mt-4'>
+                <section className='mb-2 mt-2'>
                     <MDBRow className='justify-content-center'>
-                        <MDBCol lg='6' md='12' className='mb-4 mb-md-0'>
+                        <MDBCol lg='6' md='12' className='mb-2 mb-md-0'>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis molestias.
-                                Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam voluptatem veniam,
-                                est atque cumque eum delectus sint!
                             </p>
                         </MDBCol>
                     </MDBRow>

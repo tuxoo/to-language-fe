@@ -1,4 +1,4 @@
-import {NoteTypeEnum} from "./enums/note-type.enum";
+import {NoteTypeEnum} from "./note-type.model";
 
 export interface Note {
     id: string,

@@ -1,4 +1,4 @@
-import {LanguageEnum} from "./enums/language.enum";
+import {LanguageEnum} from "./enum/language.enum";
 
 export interface Course {
     id: string,

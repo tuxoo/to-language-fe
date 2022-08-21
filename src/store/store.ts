@@ -3,12 +3,14 @@ import {createBrowserHistory} from 'history';
 import userReducer from './slice/user.slice';
 import coursesReducer from './slice/course.slice';
 import notesReducer from './slice/note.slice';
+import itemsReducer from './slice/item.slice';
 import {connectRouter, routerMiddleware} from "connected-react-router";
 
 export const history = createBrowserHistory();
 
 export const rootReducer = combineReducers({
     userReducer,
+    itemsReducer,
     coursesReducer,
     notesReducer,
     router: connectRouter(history)

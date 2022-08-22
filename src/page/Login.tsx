@@ -5,8 +5,7 @@ import {
     MDBCard,
     MDBCardBody,
     MDBCardHeader,
-    MDBCardText,
-    MDBCardTitle, MDBContainer,
+    MDBContainer,
     MDBTabs,
     MDBTabsItem,
     MDBTabsLink
@@ -56,28 +55,85 @@ const Login = () => {
     }
 
     return (
-        <MDBContainer className='py-2 d-flex justify-content-center'>
+        <MDBContainer className='d-flex justify-content-center py-4'>
             <MDBCard className='text-center w-50 align-items-center'>
                 <MDBCardHeader>
                     <MDBTabs className='card-header-tabs'>
                         <MDBTabsItem>
-                            <MDBTabsLink active>
+                            <MDBTabsLink
+                                active={!showRegister}
+                                onClick={() => setShowRegister(false)}>
                                 Sign In
                             </MDBTabsLink>
                         </MDBTabsItem>
                         <MDBTabsItem>
-                            <MDBTabsLink>
+                            <MDBTabsLink
+                                active={showRegister}
+                                onClick={() => setShowRegister(true)}>
                                 Sign Up
                             </MDBTabsLink>
                         </MDBTabsItem>
                     </MDBTabs>
                 </MDBCardHeader>
                 <MDBCardBody>
-                    <MDBCardTitle>Sign in to ToLanguage</MDBCardTitle>
-                    <MDBCardText>
-                        Please enter your Email and Password
-                    </MDBCardText>
-                    <MDBBtn>Go somewhere</MDBBtn>
+                    <div className="mb-md-5 mt-md-4 pb-5">
+                        <h2 className="fw-bold mb-2">
+                            {!showRegister ? "Sign in to ToLanguage" : "Sign up to ToLanguage"}
+                        </h2>
+                        <p className="text-dark-50 mb-4">
+                            {!showRegister ? "Please enter your Email and Password" : "Please enter user details"}
+                        </p>
+                        {showRegister && (
+                            <>
+                                <Input name="firstName"
+                                       type="text"
+                                       value={firstName}
+                                       label="First Name"
+                                       handle={handleChange}/>
+                                <Input name="lastName"
+                                       type="text"
+                                       value={lastName}
+                                       label="Last Name"
+                                       handle={handleChange}/>
+                            </>
+                        )}
+                        <Input name="email"
+                               type="email"
+                               value={email}
+                               label="Email"
+                               handle={handleChange}/>
+                        <Input name="password"
+                               type="password"
+                               value={password}
+                               label="Password"
+                               handle={handleChange}/>
+                        {showRegister &&
+                            <Input name="confirmPassword"
+                                   type="password"
+                                   value={confirmPassword}
+                                   label="Confirm Password"
+                                   handle={handleChange}/>}
+                        {!showRegister ? (
+                            <MDBBtn
+                                className='lg btn-outline-dark btn-lg px-5'
+                                color='light'
+                                type='button'
+                                onClick={() => handleLogin()}
+                                active
+                            >
+                                Sign in
+                            </MDBBtn>
+                        ) : (
+                            <MDBBtn
+                                className='lg btn-outline-dark btn-lg px-5'
+                                color='light'
+                                type='button'
+                                onClick={() => handleRegister()}
+                            >
+                                Sign Up
+                            </MDBBtn>
+                        )}
+                    </div>
                 </MDBCardBody>
             </MDBCard>
         </MDBContainer>

@@ -11,7 +11,7 @@ interface InputProps {
 
 const Input = ({name, type, value, label, handle}: InputProps) => {
     return (
-        <div className="mb-4 form-white">
+        <div className="mb-4 form-white md-outline">
             <MDBInput
                 type={type}
                 name={name}

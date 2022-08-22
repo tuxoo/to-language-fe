@@ -3,6 +3,7 @@ import {MDBCard, MDBCardBody, MDBCardFooter, MDBCardImage, MDBCardText, MDBCardT
 import {Course} from "../model/course.model";
 import {useAppDispatch, useAppSelector} from "../hook/hooks";
 import {deleteCourse, getCourse} from "../store/slice/course.slice";
+import moment from "moment";
 
 interface CourseProps {
     course: Course
@@ -63,7 +64,9 @@ const CourseCard = ({course}: CourseProps) => {
                 </MDBCardBody>
                 <MDBCardFooter border=''>
                     {/*<MDBBtnGroup size='lg' className=''>*/}
-                    <big>{course.startedAt}</big>
+                    <big>{
+                        moment(course.startedAt).format('D MMMM YYYY')
+                    }</big>
 
                     {/*<MDBBtn*/}
                     {/*    className='px-5'*/}
